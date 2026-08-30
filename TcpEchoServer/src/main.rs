@@ -12,20 +12,21 @@ fn handle_client(mut stream: TcpStream) {
             .read(&mut buffer)
             .expect("Failed to read from client!");
 
-        // Ensure there are actual bytes being read
-        if bytes_read != 0 {
-            // converts the data in the buffer to a UTF8 encoded string
-            let request = String::from_utf8_lossy(&buffer[..bytes_read]);
-            println!("Received request: {}", request);
-
-            // Prepares a response and converts it to bytes to be returned as a row of bytes.
-            let built_response = format!("{request}");
-
-            let response = built_response.as_bytes();
-
-            // Write to the client
-            stream.write(response).expect("Failed to write response!");
+        if bytes_read == 0 {
+            return;
         }
+
+        // converts the data in the buffer to a UTF8 encoded string
+        let request = String::from_utf8_lossy(&buffer[..bytes_read]);
+        println!("Received request: {}", request);
+
+        // Prepares a response and converts it to bytes to be returned as a row of bytes.
+        let built_response = format!("{request}");
+
+        let response = built_response.as_bytes();
+
+        // Write to the client
+        stream.write(response).expect("Failed to write response!");
     }
 }
 
