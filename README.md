@@ -18,17 +18,12 @@ cargo run
 
 ### Requestor
 
-Use `cmd` with `telnet` to send a request to the Rust application.
-
-Windows requires `telnet` to be enabled first:
-
-- **Enable:** `dism /online /Enable-Feature /FeatureName:TelnetClient`
-- **Disable:** `dism /online /Disable-Feature /FeatureName:TelnetClient`
+Utilize `PuTTy` and connect via `Raw` to make any requests.
 
 Then connect:
 
 ```
-telnet 127.0.0.1 <port>
+127.0.0.1 7878
 ```
 
 ## Test
